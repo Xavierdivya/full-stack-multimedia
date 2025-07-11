@@ -1,4 +1,4 @@
-const socket = io('http://localhost:3000');
+const socket = io('http://localhost:5001');
 
 socket.on('updateCounter', (value) => {
     document.getElementById('counter').innerText = value;
