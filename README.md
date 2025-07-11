@@ -78,7 +78,7 @@ http://localhost:5001
 
 ## 📸 Demo Screenshot
 
-<img src="./assets/screenshot.png" alt="Multiplayer Counter App" width="400"/>
+<img src="screenshot.png" alt="Multiplayer Counter App" width="400"/>
 
 
 ---
