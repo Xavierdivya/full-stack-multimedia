@@ -4,35 +4,41 @@ const socketIo = require('socket.io');
 const cors = require('cors');
 
 const app = express();
+const PORT = process.env.PORT || 5001;
+
+// Apply CORS middleware
+app.use(cors());
+
 const server = http.createServer(app);
 const io = socketIo(server, {
-    cors: { origin: '*' } // Allow all origins for simplicity
+    cors: { origin: '*' }
 });
 
 let counter = 0;
 
 io.on('connection', (socket) => {
-    console.log('A user connected');
+    console.log(`🔌 User connected: ${socket.id}`);
 
     // Send initial counter value
     socket.emit('updateCounter', counter);
 
-    // Handle counter update
+    // Increment
     socket.on('increment', () => {
         counter++;
         io.emit('updateCounter', counter);
     });
 
+    // Decrement
     socket.on('decrement', () => {
         counter--;
         io.emit('updateCounter', counter);
     });
 
     socket.on('disconnect', () => {
-        console.log('User disconnected');
+        console.log(`❌ User disconnected: ${socket.id}`);
     });
 });
 
-server.listen(5001, () => {
-    console.log('Server is running on http://localhost:5001');
+server.listen(PORT, () => {
+    console.log(`🚀 Server running at http://localhost:${PORT}`);
 });
